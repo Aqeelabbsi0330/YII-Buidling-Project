@@ -1,15 +1,33 @@
-# Yii2 folders to ignore
-/vendor/
-/runtime/
-/web/assets/
+# phpstorm project files
+.idea
 
-# Sensitive files
-.env
+# netbeans project files
+nbproject
 
-# IDE settings
-/.idea/
-/.vscode/
+# zend studio for eclipse project files
+.buildpath
+.project
+.settings
 
-# OS junk files
-.DS_Store
+# windows thumbnail cache
 Thumbs.db
+
+# composer vendor dir
+/vendor
+
+# composer itself is not needed
+composer.phar
+
+# Mac DS_Store Files
+.DS_Store
+
+# phpunit itself is not needed
+phpunit.phar
+# local phpunit config
+/phpunit.xml
+
+tests/_output/*
+tests/_support/_generated
+
+#vagrant folder
+/.vagrant
