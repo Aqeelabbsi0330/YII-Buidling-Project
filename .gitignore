@@ -1,0 +1,15 @@
+# Yii2 folders to ignore
+/vendor/
+/runtime/
+/web/assets/
+
+# Sensitive files
+.env
+
+# IDE settings
+/.idea/
+/.vscode/
+
+# OS junk files
+.DS_Store
+Thumbs.db
