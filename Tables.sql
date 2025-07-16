@@ -1,167 +1,176 @@
 -- Tables
-CREATE TABLE IF NOT EXISTS Users (
+CREATE TABLE IF NOT EXISTS user (
     id INT PRIMARY KEY,
-    CNIC INT ,
-    Email VARCHAR(40)NOT NULL ,
-    UserPassword  VARCHAR(255) NOT NULL,
-    PhoneNumber VARCHAR(15) NOT NULL,
-    Province VARCHAR(20) NOT NULL,
-    District VARCHAR(20) NOT NULL,
-    City VARCHAR(20) NOT NULL,
-    Address VARCHAR(100) NOT NULL,
-    CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    cnic INT ,
+    email VARCHAR(40)  ,
+    userPassword  VARCHAR(255) ,
+    phoneNumber VARCHAR(15) ,
+    province VARCHAR(20) ,
+    district VARCHAR(20),
+    city VARCHAR(20) ,
+    address VARCHAR(100) ,
+    status VARCHAR(25) ,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updatedat TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    createdBy INT NOT NULL,
-    updatedBy INT,
+    createdBy INT,
+    updatedBy INT
    
 );
-CREATE TABLE IF NOT EXISTS Project(
-    id INT PRIMARY KEY NOT NULL,
-    ProjectName VARCHAR(100) NOT NULL,
-    Description TEXT NOT NULL,
-    Status VARCHAR(25) NOT NULL,
-    CreatedBy INT NOT NULL,
-    UpdatedBy INT,
-    CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    UpdatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (CreatedBy) REFERENCES Users(CNIC) ON DELETE RESTRICT ON UPDATE CASCADE,
-    FOREIGN KEY (UpdatedBy) REFERENCES Users(CNIC) ON DELETE SET NULL ON UPDATE CASCADE
+CREATE TABLE IF NOT EXISTS project(
+    id INT PRIMARY KEY  ,
+    projectName VARCHAR(100) ,
+    description TEXT ,
+    status VARCHAR(25)  ,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    createdBy INT  ,
+    updatedBy INT
+    -- FOREIGN KEY (CreatedBy) REFERENCES Users(CNIC) ON DELETE RESTRICT ON UPDATE CASCADE,
+    -- FOREIGN KEY (UpdatedBy) REFERENCES Users(CNIC) ON DELETE SET NULL ON UPDATE CASCADE
 );
-CREATE TABLE IF NOT EXISTS Unit(
-    id INT PRIMARY KEY ,
-    BuildingNumber VARCHAR(20) NOT NULL,
-    FloorNumber VARCHAR(25) NOT NULL,
-    OccupiedBy INT,-- Foreign key to Users table
-    ProjectUnit INT NOT NULL, -- Foreign key to Project table
-    Status VARCHAR(25) NOT NULL
-    CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    UpdatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    CreatedBy INT NOT NULL,
-    UpdatedBy INT,
-    FOREIGN KEY (OccupiedBy) REFERENCES Users(CNIC) ON DELETE SET NULL ON UPDATE CASCADE
-    FOREIGN KEY (ProjectUnit) REFERENCES Project(ProjectID) ON DELETE CASCADE ON UPDATE CASCADE
+CREATE TABLE IF NOT EXISTS unit(
+    id INT PRIMARY KEY  ,
+    buildingNumber VARCHAR(20) ,
+    floorNumber VARCHAR(25) ,
+    area VARCHAR(100) ,
+    projectId INT , -- Foreign key to Project table
+    status VARCHAR(25) ,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    createdBy INT  ,
+    updatedBy INT
+    --FOREIGN KEY (OccupiedBy) REFERENCES Users(CNIC) ON DELETE SET NULL ON UPDATE CASCADE
+   -- FOREIGN KEY (ProjectUnit) REFERENCES Project(ProjectID) ON DELETE CASCADE ON UPDATE CASCADE
 );
-CREATE TABE IF NOT EXISTS Complaints(
+CREATE TABLE IF NOT EXISTS complaint(
     id VARCHAR(20) PRIMARY KEY,
-    Titel VARCHAR(100) NOT NULL,
-    Description TEXT NOT NULL,
-    Status VARCHAR(20) NOT NULL,
-    UnitID INT NOT NULL,
-    CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    UpdatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    CreatedBy INT NOT NULL,
-    UpdatedBy INT,
-    FOREIGN KEY (CreatedBy) REFERENCES Users(CNIC) ON DELETE RESTRICT ON UPDATE CASCADE
-    FOREIGN KEY (UpdatedBy) REFERENCES Users(CNIC) ON DELETE SET NULL  ON UPDATE CASCADE
-    FOREIGN KEY (UnitID) REFERENCES Unit(UnitID) ON DELETE CASCADE ON UPDATE CASCADE
+    title VARCHAR(100)  ,
+    description TEXT  ,
+    status VARCHAR(50)  ,
+    unitID INT  ,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    createdBy INT  ,
+    updatedBy INT
+    -- FOREIGN KEY (CreatedBy) REFERENCES Users(CNIC) ON DELETE RESTRICT ON UPDATE CASCADE
+    -- FOREIGN KEY (UpdatedBy) REFERENCES Users(CNIC) ON DELETE SET NULL  ON UPDATE CASCADE
+    -- FOREIGN KEY (UnitID) REFERENCES Unit(UnitID) ON DELETE CASCADE ON UPDATE CASCADE
 
 );
-CREATE TABLE IF NOT EXISTS Documents(
+CREATE TABLE IF NOT EXISTS document(
     id INT PRIMARY KEY ,
-    DocumentType VARCHAR(25) NOT NULL,
-    FileURl VARCHAR(255) NOT NULL,
-    createdby INT NOT NULL,
+    doucmentTitle VARCHAR(100)  ,
+    documentType VARCHAR(25)  ,
+    fileURl VARCHAR(255)  ,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    createdby INT  ,
     updatedby INT,
-    CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    UpdatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-    sourceTable VARCHAR(50) NOT NULL, 
-    sourceID INT NOT NULL,
-    FOREIGN KEY (createdBy) REFERENCES Users(CNIC) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (updatedby) REFERENCES Users(CNIC) ON DELETE SET NULL ON UPDATE CASCADE
+    sourceTable VARCHAR(50)  , --
+    sourceId INT --Foreign key to user
+    -- FOREIGN KEY (createdBy) REFERENCES Users(CNIC) ON DELETE CASCADE ON UPDATE CASCADE,
+    -- FOREIGN KEY (updatedby) REFERENCES Users(CNIC) ON DELETE SET NULL ON UPDATE CASCADE
 
 );
-CREATE TABLE IF NOT EXISTS DiscountRequest(
-    id INT PRIMARY KEY,
-    UnitID INT NOT NULL,// Foreign key to Unit table
-    RequestedAmount FLOAT(10,2) NOT NULL,
-    Reason TEXT NOT NULL,
-    Status VARCHAR(20) NOT NULL,
-    Remarks TEXT,
-    sourceTable Text NOT NULL, 
-    sourceID INT NOT NULL, 
-    CreatedBy INT NOT NULL,
-    UpdatedBy INT,
-    CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    UpdatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (CreatedBy) REFERENCES Users(CNIC) ON DELETE RESTRICT ON UPDATE CASCADE,
-    FOREIGN KEY (UpdatedBy) REFERENCES Users(CNIC) ON DELETE SET NULL ON UPDATE CASCADE,
-    FOREIGN KEY (UnitID) REFERENCES Unit(UnitID) ON DELETE CASCADE ON UPDATE CASCADE
+CREATE TABLE IF NOT EXISTS discount_Request(
+    id INT PRIMARY KEY Auto_INCREMENT,
+    unitID INT ,-- Foreign key to Unit table
+    requestedAmount FLOAT(10,2) ,
+    reason TEXT ,
+    status VARCHAR(20) ,
+    remarks TEXT,
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    createdBy INT,
+    updatedBy INT,
+    discountApprovedby INT,
+    sourceTable VARCHAR(50)  , --
+    sourceId INT  -- Foreign key to user
+--     FOREIGN KEY (CreatedBy) REFERENCES Users(CNIC) ON DELETE RESTRICT ON UPDATE CASCADE,
+--     FOREIGN KEY (UpdatedBy) REFERENCES Users(CNIC) ON DELETE SET NULL ON UPDATE CASCADE,
+--     FOREIGN KEY (UnitID) REFERENCES Unit(UnitID) ON DELETE CASCADE ON UPDATE CASCADE
 );
-CREATE TABLE IF NOT EXISTS Notice(
-    id INT PRIMARY KEY,
-    Title VARCHAR(100) NOT NULL,
-    Description TEXT NOT NULL,
-    CreatedBy INT NOT NULL,
-    UpdatedBy INT,
-    Status VARCHAR(25) NOT NULL,
-    CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    UpdatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (CreatedBy) REFERENCES Users(CNIC) ON DELETE RESTRICT ON UPDATE CASCADE,
-    FOREIGN KEY (UpdatedBy) REFERENCES Users(CNIC) ON DELETE SET NULL ON UPDATE CASCADE
-);
--- User and Notice, Project and Notice have a many-to-many relationship, so we need separate associative tables for each.
--- We can't use a single table because one notice can be linked to multiple users, units, and projects.
--- Putting all these links in one table would make the structure confusing and hard to manage.
 
-CREATE TABLE UserNotice (
-    CNIC BIGINT,
-    NoticeID INT,
-    NoticeType ENUM('General', 'Urgent', 'Reminder') NOT NULL, 
-    Status ENUM('NOT Acknowledged', 'Acknowledged') DEFAULT 'NOT Acknowledged',
-    CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    UpdatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    PRIMARY KEY (CNIC, NoticeID),
-    FOREIGN KEY (CNIC) REFERENCES Users(CNIC) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (NoticeID) REFERENCES Notice(NoticeID) ON DELETE CASCADE ON UPDATE CASCADE
+CREATE TABLE IF NOT EXISTS utility_bill(
+   id INT PRIMARY KEY,
+    unitId INT  ,
+    billType VARCHAR(25)  ,
+    amount DECIMAL(10, 2)  ,
+    billSettingId VARCHAR(100),
+    billMonth Date  ,
+    billYear INT  ,
+    dueDate DATE  ,
+    paymentDate DATE,
+    paymentMode VARCHAR(50),
+    transactionID VARCHAR(50),
+    checkNumber VARCHAR(50),
+    bankName VARCHAR(100),
+    bankBranch VARCHAR(100),
+    paidStatus VARCHAR(25)  ,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    createdBy INT ,
+    updatedBy INT
+    -- FOREIGN KEY (CreatedBy) REFERENCES Users(CNIC) ON DELETE RESTRICT ON UPDATE CASCADE,
+    -- FOREIGN KEY (UpdatedBy) REFERENCES Users(CNIC) ON DELETE SET NULL ON UPDATE CASCADE,
+    -- FOREIGN KEY (UnitID) REFERENCES Unit(UnitID) ON DELETE CASCADE ON UPDATE CASCADE
 );
-CREATE TABLE UnitNotice (
-    UnitID INT,
-    NoticeID INT,
-    PRIMARY KEY (UnitID, NoticeID),
-    NoticeType ENUM('General', 'Urgent', 'Reminder') NOT NULL, 
-    Status ENUM('NOT Acknowledged', 'Acknowledged') DEFAULT 'NOT Acknowledged',
-    CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    UpdatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (UnitID) REFERENCES Unit(UnitID) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (NoticeID) REFERENCES Notice(NoticeID)  ON DELETE CASCADE ON UPDATE CASCADE
+CREATE TABLE IF NOT EXISTS maintenance_charge(
+    id INT PRIMARY KEY,
+    unitId INT  ,
+    floorNumber VARCHAR(25) ,
+    property VARCHAR(100) ,
+    title VARCHAR(100) ,
+    description TEXT ,
+    type VARCHAR(50)  ,
+    areaTo VARCHAR(100)  ,
+    areaFrom VARCHAR(100)  ,
+    amount DECIMAL(10, 2)  ,
+    billMonth Date  ,
+    billYear INT  ,
+    dueDate DATE  ,
+    paymentDate DATE,
+    paymentMode VARCHAR(50),
+    transactionID VARCHAR(50),
+    checkNumber VARCHAR(50),
+    bankName VARCHAR(100),
+    bankBranch VARCHAR(100),
+    paidStatus VARCHAR(25)  ,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    createdBy INT  ,
+    updatedBy INT
+    -- FOREIGN KEY (CreatedBy) REFERENCES Users(CNIC) ON DELETE RESTRICT ON UPDATE CASCADE,
+    -- FOREIGN KEY (UpdatedBy) REFERENCES Users(CNIC) ON DELETE SET NULL ON UPDATE CASCADE,
+    -- FOREIGN KEY (UnitID) REFERENCES Unit(UnitID) ON DELETE CASCADE ON UPDATE CASCADE
 );
-CREATE TABLE ProjectNotice (
-    ProjectID INT,
-    NoticeID INT,
-    NoticeType ENUM('General', 'Urgent', 'Reminder') NOT NULL, 
-    Status ENUM('NOT Acknowledged', 'Acknowledged') DEFAULT 'NOT Acknowledged',
-    CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    UpdatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    PRIMARY KEY (ProjectID, NoticeID),
-    FOREIGN KEY (ProjectID) REFERENCES Project(ProjectID) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (NoticeID) REFERENCES Notice(NoticeID) ON DELETE CASCADE ON UPDATE CASCADE
+CREATE TABLE IF NOT EXISTS rent_charge(
+  id INT PRIMARY KEY,
+    unitId INT  ,
+    floorNumber VARCHAR(25)  ,
+    property VARCHAR(100)  ,
+     title VARCHAR(100)  ,
+    type VARCHAR(50)  ,
+    description TEXT  ,
+    areaTo VARCHAR(100)  ,
+    areaFrom VARCHAR(100)  ,
+    amount DECIMAL(10, 2)  ,
+    billMonth Date  ,
+    billYear INT  ,
+    dueDate DATE  ,
+    paymentDate DATE,
+    paymentMode VARCHAR(50),
+    transactionID VARCHAR(50),
+    checkNumber VARCHAR(50),
+    bankName VARCHAR(100),
+    bankBranch VARCHAR(100),
+    paidStatus VARCHAR(25)  ,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    createdBy INT  ,
+    updatedBy INT
+    -- FOREIGN KEY (CreatedBy) REFERENCES Users(CNIC) ON DELETE RESTRICT ON UPDATE CASCADE,
+    -- FOREIGN KEY (UpdatedBy) REFERENCES Users(CNIC) ON DELETE SET NULL ON UPDATE CASCADE,
+    -- FOREIGN KEY (UnitID) REFERENCES Unit(UnitID) ON DELETE CASCADE ON UPDATE CASCADE
 );
-CREATE TABLE IF NOT EXISTS ProjectMembers(
-    ID INT NOT NULL,
-    UserID INT NOT NULL,
-    PRIMARY KEY (ProjectID, UserID),
-    Role ENUM('Manager', 'Staff', 'Volunteer') NOT NULL,
-    CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    UpdatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (id) REFERENCES Project(id) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (UserID) REFERENCES Users(CNIC) ON DELETE RESTRICT ON UPDATE CASCADE
-);
-CREATE TABLE IF NOT EXISTS UtilityBills(
-    BillID INT PRIMARY KEY,
-    UnitID INT NOT NULL,
-    BillType VARCHAR(25) NOT NULL,
-    Amount DECIMAL(10, 2) NOT NULL,
-    BillMonth Date NOT NULL,
-    BillYear INT NOT NULL,
-    DueDate DATE NOT NULL,
-    PaymentDate DATE,
-    PaidStatus VARCHAR(25) NOT NULL,
-    CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    UpdatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    CreatedBy INT NOT NULL,
-    UpdatedBy INT,
-    FOREIGN KEY (CreatedBy) REFERENCES Users(CNIC) ON DELETE RESTRICT ON UPDATE CASCADE,
-    FOREIGN KEY (UpdatedBy) REFERENCES Users(CNIC) ON DELETE SET NULL ON UPDATE CASCADE,
-    FOREIGN KEY (UnitID) REFERENCES Unit(UnitID) ON DELETE CASCADE ON UPDATE CASCADE
-);
---Bill settings talble --- attributes ?
+-
