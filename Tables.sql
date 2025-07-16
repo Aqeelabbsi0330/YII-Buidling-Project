@@ -33,8 +33,8 @@ CREATE TABLE IF NOT EXISTS unit(
     buildingNumber VARCHAR(20) ,
     floorNumber VARCHAR(25) ,
     area VARCHAR(100) ,
-    projectId INT , -- Foreign key to Project table
     status VARCHAR(25) ,
+    projectId INT , -- Foreign key to Project table
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     createdBy INT  ,
