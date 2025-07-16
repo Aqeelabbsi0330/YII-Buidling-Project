@@ -8,18 +8,19 @@ use app\models\Complaint;
 
 class ComplaintController extends Controller
 {
-    public function actionCreate()
-    {
-        $model = new Complaint();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            // Optionally, set a success flash message
-            Yii::$app->session->setFlash('success', 'Complaint submitted successfully.');
-            return $this->redirect(['create']);
-        }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+   public function actionIndex($status = null)
+{
+    $query = Complaint::find();
+    if ($status) {
+        $query->where(['status' => $status]);
     }
+
+    $complaints = $query->all();
+
+    return $this->render('index', [
+        'complaints' => $complaints,
+        'currentStatus' => $status,
+    ]);
+}
+
 }

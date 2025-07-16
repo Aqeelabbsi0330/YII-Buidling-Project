@@ -24,11 +24,11 @@ AppAsset::register($this);
 
 <?php include(__DIR__ . '/_scripts.php'); ?>
 <?php include(__DIR__ . '/_header.php'); ?>
-
-<div class="app-wrapper">
-    <?= $content ?>  
-    <?php include(__DIR__ . '/_footer.php'); ?> 
-</div>
+  
+   <div class="app-wrapper bg-light pt-5 min-vh-100">
+         <?= $content ?>  
+         <?php include(__DIR__ . '/_footer.php'); ?> 
+   </div>
 
 
 
