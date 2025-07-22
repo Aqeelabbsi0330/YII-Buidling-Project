@@ -319,7 +319,7 @@
 						</a><!--//nav-link-->
 						<div id="submenu-6" class="collapse submenu submenu-6" data-bs-parent="#menu-accordion">
 							<ul class="submenu-list list-unstyled">
-								<li class="submenu-item"><a class="submenu-link" href="<?= \yii\helpers\Url::to(['utility/index']) ?>">Rent_Agreement</a></li>
+								<li class="submenu-item"><a class="submenu-link" href="<?= \yii\helpers\Url::to(['rent/index']) ?>">Rent_Agreement</a></li>
 								<li class="submenu-item"><a class="submenu-link" href="<?= \yii\helpers\Url::to(['site/utility_bill_table']) ?>">Rent_Agrement_Table</a></li>
 							</ul>
 						</div>

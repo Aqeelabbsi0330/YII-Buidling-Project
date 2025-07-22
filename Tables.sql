@@ -158,3 +158,16 @@ CREATE TABLE IF NOT EXISTS rent_charge(
     updatedBy INT
     
 );
+CREATE TABLE IF NOT EXISTS rent_agreement(
+    id INT PRIMARY KEY Auto_INCREMENT;
+    unitId INT ,
+    rentaltype VARCHAR(50)  ,
+    rentAmount DECIMAL(10, 2)  ,
+    paymentType VARCHAR(50)  ,
+    incrementType VARCHAR(50)  ,
+    rentincreementAmount DECIMAL(10, 2)  ,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    createdBy INT  ,
+    updatedBy INT
+);
