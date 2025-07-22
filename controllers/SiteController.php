@@ -13,44 +13,59 @@ class SiteController extends Controller
         return $this->render('index');
     }
 
-    public function actionUser()
-    {
-        return $this->render('users/user');
-    }
-     public function actionUser_table()
-    {
-        return $this->render('users/user_table');
-    }
-     public function actionComplaint()
-    {
-        return $this->render('complaints/complaint');
-    }
-     public function actionComplaint_table()
-    {
-        return $this->render('complaints/complaint_table');
-    }
-      public function actionNotice()
+    // public function actionUser()
+    // {
+    //     return $this->render('users/user');
+    // }
+    //  public function actionUser_table()
+    // {
+    //     return $this->render('users/user_table');
+    // }
+    // public function actionComplaint()
+    // {
+    //     return $this->render('complaint');
+    // }
+    // public function actionComplaint_table()
+    // {
+    //     return $this->render('complaints/complaint_table');
+    // }
+    public function actionNotice()
     {
         return $this->render('notices/notice');
     }
-      public function actionNotice_table()
+    public function actionNotice_table()
     {
         return $this->render('notices/notice_table');
     }
-      public function actionProject()
-    {
-        return $this->render('projects/project');
-    }
-      public function actionProject_table()
+    // public function actionProject()
+    // {
+    //     return $this->render('projects/project');
+    // }
+    public function actionProject_table()
     {
         return $this->render('projects/project_table');
     }
-     public function actionUtility_bill()
-    {
-        return $this->render('utilityBills/utility_bill');
-    }
-     public function actionUtility_bill_table()
+    // public function actionUtility_bill()
+    // {
+    //     return $this->render('utilityBills/utility_bill');
+    // }
+    public function actionUtility_bill_table()
     {
         return $this->render('utilityBills/utility_bill_table');
+    }
+    public function actionDbTest()
+    {
+        $db = Yii::$app->db;
+        try {
+            $db->open();
+            return "db connection successful";
+        } catch (\Exception $e) {
+
+            return "database connection failed" . $e->getMessage();
+        }
+    }
+    public function actionError()
+    {
+        return $this->render('error');
     }
 }
