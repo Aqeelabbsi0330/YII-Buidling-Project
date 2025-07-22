@@ -4,3 +4,57 @@ protected/runtime/*
 !protected/runtime/.gitignore
 protected/data/*.db
 themes/classic/views/
+# Composer vendor directory
+/vendor/
+
+# Yii runtime files
+/runtime/
+/web/assets/
+/backend/runtime/
+/backend/web/assets/
+/frontend/runtime/
+/frontend/web/assets/
+/console/runtime/
+
+# Node modules (if using frontend tools)
+node_modules/
+
+# Environment config
+/.env
+/.env.local
+/config/db.php
+/config/db_local.php
+
+# PHPStorm and other IDEs
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Log files
+*.log
+
+# PHPUnit test result cache
+.phpunit.result.cache
+
+# Backup or temp files
+*.bak
+*.tmp
+*.swp
+
+# Uploaded files (optional, depends on project)
+web/uploads/
+
+# Yii2 Basic template specific
+/web/runtime/
+/web/assets/
+
+# Yii2 Advanced template specific
+/backend/runtime/
+/backend/web/assets/
+/frontend/runtime/
+/frontend/web/assets/
+/common/runtime/
